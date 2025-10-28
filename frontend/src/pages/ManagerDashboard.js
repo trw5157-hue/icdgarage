@@ -202,16 +202,35 @@ const ManagerDashboard = () => {
       toast.success("Invoice generated successfully!");
       
       // Download PDF
-      const pdfResponse = await axios.get(`${API}/invoices/${response.data.id}/pdf`, {
-        responseType: 'blob'
-      });
-      const url = window.URL.createObjectURL(new Blob([pdfResponse.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `${response.data.invoice_number}.pdf`);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      try {
+        const pdfResponse = await axios.get(`${API}/invoices/${response.data.id}/pdf`, {
+          responseType: 'blob',
+          headers: {
+            'Accept': 'application/pdf'
+          }
+        });
+        
+        // Create blob URL and trigger download
+        const blob = new Blob([pdfResponse.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${response.data.invoice_number}.pdf`);
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        
+        // Cleanup
+        setTimeout(() => {
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(link);
+        }, 100);
+        
+        toast.success("PDF downloaded successfully!");
+      } catch (pdfError) {
+        console.error("PDF download error:", pdfError);
+        toast.error("Invoice created but PDF download failed. Try downloading from Invoices tab.");
+      }
       
       setShowInvoiceDialog(false);
       setSelectedJob(null);
