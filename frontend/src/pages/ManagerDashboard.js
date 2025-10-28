@@ -1100,6 +1100,19 @@ const ManagerDashboard = () => {
                     placeholder="0.00"
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label>GST Rate (%) - Optional</Label>
+                  <Input
+                    type="number"
+                    step="0.01"
+                    value={invoice.gst_rate}
+                    onChange={(e) => setInvoice({...invoice, gst_rate: parseFloat(e.target.value) || 0})}
+                    className="bg-zinc-800 border-zinc-700"
+                    data-testid="invoice-gst-rate"
+                    placeholder="18.00"
+                  />
+                  <p className="text-xs text-gray-500">Set to 0 to exclude GST from invoice</p>
+                </div>
                 <div className="border-t border-zinc-700 pt-4 space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-400">Subtotal:</span>
