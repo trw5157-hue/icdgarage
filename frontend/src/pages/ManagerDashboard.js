@@ -281,7 +281,7 @@ const ManagerDashboard = () => {
   });
 
   const subtotal = invoice.labour_charges + invoice.parts_charges + invoice.tuning_charges + invoice.others_charges;
-  const gst = subtotal * 0.18;
+  const gst = subtotal * ((invoice.gst_rate || 0) / 100);
   const grandTotal = subtotal + gst;
 
   return (
