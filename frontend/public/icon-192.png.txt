@@ -1,0 +1,1 @@
+We'll use the logo URL from env, but create a simple fallback
