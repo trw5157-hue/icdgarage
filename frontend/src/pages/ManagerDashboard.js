@@ -385,17 +385,17 @@ const ManagerDashboard = () => {
   return (
     <div className="min-h-screen bg-black text-white" data-testid="manager-dashboard">
       {/* Header */}
-      <header className="bg-zinc-900 border-b border-zinc-800 px-6 py-4">
+      <header className="bg-zinc-900 border-b border-zinc-800 px-4 md:px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 md:space-x-4">
             <img 
               src={process.env.REACT_APP_LOGO_URL} 
               alt="ICD Tuning" 
-              className="h-10"
+              className="h-14 md:h-16 w-auto"
             />
             <div>
-              <h1 className="text-2xl font-bold heading-font text-red-600">ICD TUNING</h1>
-              <p className="text-sm text-gray-400">Manager Dashboard</p>
+              <h1 className="text-xl md:text-2xl font-bold heading-font text-red-600">ICD TUNING</h1>
+              <p className="text-xs md:text-sm text-gray-400">Manager Dashboard</p>
             </div>
           </div>
           <div className="flex items-center space-x-4">
