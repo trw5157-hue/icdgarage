@@ -111,15 +111,15 @@ const MechanicDashboard = () => {
             <img 
               src={process.env.REACT_APP_LOGO_URL} 
               alt="ICD Tuning" 
-              className="h-8"
+              className="h-14 md:h-16 w-auto"
             />
             <div>
-              <h1 className="text-xl font-bold heading-font text-red-600">ICD TUNING</h1>
-              <p className="text-xs text-gray-400">Mechanic Dashboard</p>
+              <h1 className="text-xl md:text-2xl font-bold heading-font text-red-600">ICD TUNING</h1>
+              <p className="text-xs md:text-sm text-gray-400">Mechanic Dashboard</p>
             </div>
           </div>
-          <div className="flex items-center space-x-3">
-            <span className="text-sm text-gray-400 hidden sm:inline">Welcome, {user?.full_name}</span>
+          <div className="flex items-center space-x-2 md:space-x-3">
+            <span className="text-xs md:text-sm text-gray-400 hidden sm:inline">Welcome, {user?.full_name}</span>
             <Button 
               onClick={logout} 
               size="sm"
