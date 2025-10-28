@@ -603,16 +603,29 @@ async def create_invoice(invoice_data: InvoiceCreate, current_user: User = Depen
     # Calculate totals
     subtotal = (invoice_data.labour_charges + invoice_data.parts_charges + 
                 invoice_data.tuning_charges + invoice_data.others_charges)
-    gst_amount = subtotal * 0.18
+    
+    # Apply GST if rate is provided and > 0
+    gst_rate = invoice_data.gst_rate if invoice_data.gst_rate is not None else 18.0
+    gst_amount = subtotal * (gst_rate / 100) if gst_rate > 0 else 0
     grand_total = subtotal + gst_amount
     
-    # Generate invoice number
-    count = await db.invoices.count_documents({}) + 1
-    invoice_number = f"ICD-2025-{count:04d}"
+    # Use custom invoice number if provided, otherwise generate
+    if invoice_data.invoice_number and invoice_data.invoice_number.strip():
+        invoice_number = invoice_data.invoice_number.strip()
+    else:
+        count = await db.invoices.count_documents({}) + 1
+        invoice_number = f"ICD-2025-{count:04d}"
+    
+    # Use custom invoice date if provided, otherwise use current date
+    if invoice_data.invoice_date and invoice_data.invoice_date.strip():
+        invoice_date = datetime.fromisoformat(invoice_data.invoice_date)
+    else:
+        invoice_date = datetime.now(timezone.utc)
     
     invoice = Invoice(
         invoice_number=invoice_number,
         job_id=invoice_data.job_id,
+        invoice_date=invoice_date,
         labour_charges=invoice_data.labour_charges,
         parts_charges=invoice_data.parts_charges,
         tuning_charges=invoice_data.tuning_charges,
