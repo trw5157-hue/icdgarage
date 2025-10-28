@@ -413,15 +413,15 @@ const ManagerDashboard = () => {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto p-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 space-y-4 md:space-y-6">
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full max-w-md grid-cols-2 bg-zinc-800">
-            <TabsTrigger value="jobs" data-testid="jobs-tab">Jobs</TabsTrigger>
-            <TabsTrigger value="invoices" data-testid="invoices-tab">Invoices</TabsTrigger>
+            <TabsTrigger value="jobs" data-testid="jobs-tab" className="text-sm">Jobs</TabsTrigger>
+            <TabsTrigger value="invoices" data-testid="invoices-tab" className="text-sm">Invoices</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="jobs" className="space-y-6 mt-6">
+          <TabsContent value="jobs" className="space-y-4 md:space-y-6 mt-4 md:mt-6">
         {/* Actions Bar */}
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <Dialog open={showNewJobDialog} onOpenChange={setShowNewJobDialog}>
