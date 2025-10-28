@@ -292,16 +292,14 @@ def generate_invoice_pdf(invoice_data: dict, job_data: dict):
     c.setFont("Helvetica-Bold", 32)
     c.drawString(width - 200, height - 60, "INVOICE")
     
-    # Business info
+    # Business info - REMOVED CONTACT DETAILS
     c.setFillColor(white)
     c.setFont("Helvetica", 10)
     y_pos = height - 100
-    c.drawString(50, y_pos, "ICD Tuning – Performance Tuning | ECU Remaps | Custom Builds")
-    c.drawString(50, y_pos - 15, "Chennai, Tamil Nadu")
-    c.drawString(50, y_pos - 30, "📞 +91 98765 43210 ✉ icdtuning@gmail.com")
+    c.drawString(50, y_pos, "Performance Tuning | Repair & Services")
     
     # Invoice details
-    y_pos = height - 180
+    y_pos = height - 150
     c.setFont("Helvetica-Bold", 11)
     c.drawString(50, y_pos, f"Invoice No: {invoice_data['invoice_number']}")
     c.drawString(50, y_pos - 20, f"Date: {invoice_data['invoice_date'].strftime('%d-%m-%Y')}")
@@ -316,7 +314,7 @@ def generate_invoice_pdf(invoice_data: dict, job_data: dict):
     # Line separator
     c.setStrokeColor(red)
     c.setLineWidth(2)
-    y_pos = height - 320
+    y_pos = height - 290
     c.line(50, y_pos, width - 50, y_pos)
     
     # Charges breakdown
@@ -331,11 +329,20 @@ def generate_invoice_pdf(invoice_data: dict, job_data: dict):
     c.drawString(50, y_pos, "Labour Charges")
     c.drawString(width - 150, y_pos, f"{invoice_data['labour_charges']:.2f}")
     
-    y_pos -= 20
-    c.drawString(50, y_pos, "Parts Charges")
-    c.drawString(width - 150, y_pos, f"{invoice_data['parts_charges']:.2f}")
+    # Parts breakdown - itemized
+    if invoice_data.get('parts') and len(invoice_data['parts']) > 0:
+        y_pos -= 20
+        c.setFont("Helvetica-Bold", 10)
+        c.drawString(50, y_pos, "Parts:")
+        y_pos -= 5
+        c.setFont("Helvetica", 9)
+        for part in invoice_data['parts']:
+            y_pos -= 15
+            c.drawString(60, y_pos, f"• {part['part_name']}")
+            c.drawString(width - 150, y_pos, f"{part['part_charges']:.2f}")
     
     y_pos -= 20
+    c.setFont("Helvetica", 10)
     c.drawString(50, y_pos, "ECU Tuning/Remapping")
     c.drawString(width - 150, y_pos, f"{invoice_data['tuning_charges']:.2f}")
     
