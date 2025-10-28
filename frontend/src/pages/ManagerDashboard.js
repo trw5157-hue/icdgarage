@@ -1118,10 +1118,12 @@ const ManagerDashboard = () => {
                     <span className="text-gray-400">Subtotal:</span>
                     <span>₹{subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">GST (18%):</span>
-                    <span>₹{gst.toFixed(2)}</span>
-                  </div>
+                  {invoice.gst_rate > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">GST ({invoice.gst_rate}%):</span>
+                      <span>₹{gst.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-lg font-bold text-red-600">
                     <span>Grand Total:</span>
                     <span>₹{grandTotal.toFixed(2)}</span>
