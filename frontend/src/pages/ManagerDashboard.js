@@ -15,6 +15,87 @@ import { Textarea } from "@/components/ui/textarea";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Helper function to download PDF with authentication
+const downloadPDFWithAuth = async (invoiceId, invoiceNumber) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    toast.error("Authentication required");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API}/invoices/${invoiceId}/pdf`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/pdf'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch PDF');
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${invoiceNumber}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+    
+    toast.success("PDF downloaded successfully!");
+    return true;
+  } catch (error) {
+    console.error('PDF download error:', error);
+    toast.error("Failed to download PDF");
+    return false;
+  }
+};
+
+// Helper function to view PDF in new window with authentication
+const viewPDFWithAuth = async (invoiceId, invoiceNumber) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    toast.error("Authentication required");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API}/invoices/${invoiceId}/pdf`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/pdf'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch PDF');
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    
+    // Open in new window
+    const newWindow = window.open(url, '_blank');
+    if (newWindow) {
+      newWindow.document.title = invoiceNumber;
+      toast.success("PDF opened in new tab");
+    } else {
+      toast.error("Popup blocked. Please allow popups for this site.");
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('PDF view error:', error);
+    toast.error("Failed to open PDF");
+    return false;
+  }
+};
+
 const ManagerDashboard = () => {
   const { user, logout } = useAuth();
   const [jobs, setJobs] = useState([]);
