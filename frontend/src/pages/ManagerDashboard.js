@@ -678,18 +678,18 @@ const ManagerDashboard = () => {
                           <div className="text-sm text-gray-400">{job.contact_number}</div>
                         </div>
                       </td>
-                      <td className="py-4">
+                      <td className="py-4 px-4 md:px-2">
                         <div>
-                          <div className="font-medium">{job.car_brand} {job.car_model}</div>
-                          <div className="text-sm text-gray-400">{job.year}</div>
+                          <div className="font-medium text-sm">{job.car_brand} {job.car_model}</div>
+                          <div className="text-xs text-gray-400">{job.year}</div>
                         </div>
                       </td>
-                      <td className="py-4 font-mono text-sm">{job.registration_number}</td>
-                      <td className="py-4">{job.assigned_mechanic_name}</td>
-                      <td className="py-4">{getStatusBadge(job.status, job)}</td>
-                      <td className="py-4 text-sm">{new Date(job.estimated_delivery).toLocaleDateString()}</td>
-                      <td className="py-4">
-                        <div className="flex gap-2 flex-wrap">
+                      <td className="py-4 px-4 md:px-2 font-mono text-xs md:text-sm">{job.registration_number}</td>
+                      <td className="py-4 px-4 md:px-2 text-sm hidden md:table-cell">{job.assigned_mechanic_name}</td>
+                      <td className="py-4 px-4 md:px-2">{getStatusBadge(job.status, job)}</td>
+                      <td className="py-4 px-4 md:px-2 text-xs hidden lg:table-cell">{new Date(job.estimated_delivery).toLocaleDateString()}</td>
+                      <td className="py-4 px-4 md:px-2">
+                        <div className="flex gap-1 md:gap-2 flex-wrap">
                           {/* Edit Button - Always visible */}
                           <Button
                             size="sm"
