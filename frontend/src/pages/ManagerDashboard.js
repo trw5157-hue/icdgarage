@@ -672,23 +672,23 @@ const ManagerDashboard = () => {
                     };
                     return (
                     <tr key={job.id} className={`border-b border-zinc-800 hover:bg-zinc-800/50 ${statusClasses[job.status] || ''}`}>
-                      <td className="py-4 px-4 md:px-2">
+                      <td className="py-4 px-4 md:px-6">
                         <div>
                           <div className="font-medium text-sm">{job.customer_name}</div>
                           <div className="text-xs text-gray-400">{job.contact_number}</div>
                         </div>
                       </td>
-                      <td className="py-4 px-4 md:px-2">
+                      <td className="py-4 px-4 md:px-6">
                         <div>
                           <div className="font-medium text-sm">{job.car_brand} {job.car_model}</div>
                           <div className="text-xs text-gray-400">{job.year}</div>
                         </div>
                       </td>
-                      <td className="py-4 px-4 md:px-2 font-mono text-xs md:text-sm">{job.registration_number}</td>
-                      <td className="py-4 px-4 md:px-2 text-sm hidden md:table-cell">{job.assigned_mechanic_name}</td>
-                      <td className="py-4 px-4 md:px-2">{getStatusBadge(job.status, job)}</td>
-                      <td className="py-4 px-4 md:px-2 text-xs hidden lg:table-cell">{new Date(job.estimated_delivery).toLocaleDateString()}</td>
-                      <td className="py-4 px-4 md:px-2">
+                      <td className="py-4 px-4 md:px-6 font-mono text-xs md:text-sm">{job.registration_number}</td>
+                      <td className="py-4 px-4 md:px-6 text-sm hidden md:table-cell">{job.assigned_mechanic_name}</td>
+                      <td className="py-4 px-4 md:px-6">{getStatusBadge(job.status, job)}</td>
+                      <td className="py-4 px-4 md:px-6 text-xs hidden lg:table-cell">{new Date(job.estimated_delivery).toLocaleDateString()}</td>
+                      <td className="py-4 px-4 md:px-6">
                         <div className="flex gap-1 md:gap-2 flex-wrap">
                           {/* Edit Button - Always visible */}
                           <Button
