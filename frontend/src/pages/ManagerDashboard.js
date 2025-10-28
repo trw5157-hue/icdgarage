@@ -282,50 +282,8 @@ const ManagerDashboard = () => {
       });
       toast.success("Invoice generated successfully!");
       
-      // Download PDF - Multiple fallback methods
-      try {
-        const pdfResponse = await axios.get(`${API}/invoices/${response.data.id}/pdf`, {
-          responseType: 'blob',
-          headers: {
-            'Accept': 'application/pdf'
-          }
-        });
-        
-        // Method 1: Try direct download
-        const blob = new Blob([pdfResponse.data], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(blob);
-        
-        // Create and click download link
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${response.data.invoice_number}.pdf`;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        
-        // If download doesn't work in 2 seconds, open in new tab
-        setTimeout(() => {
-          if (document.body.contains(link)) {
-            // Download might have failed, try opening in new tab
-            window.open(url, '_blank');
-          }
-          window.URL.revokeObjectURL(url);
-          if (document.body.contains(link)) {
-            document.body.removeChild(link);
-          }
-        }, 2000);
-        
-        toast.success("PDF downloaded! Check your downloads folder.");
-      } catch (pdfError) {
-        console.error("PDF download error:", pdfError);
-        // Try alternative method - direct URL
-        try {
-          window.open(`${API}/invoices/${response.data.id}/pdf`, '_blank');
-          toast.info("PDF opened in new tab. Use browser's save option to download.");
-        } catch (err) {
-          toast.error("Failed to open PDF. Try downloading from Invoices tab.");
-        }
-      }
+      // Download PDF with authentication
+      await downloadPDFWithAuth(response.data.id, response.data.invoice_number);
       
       setShowInvoiceDialog(false);
       setSelectedJob(null);
