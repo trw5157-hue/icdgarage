@@ -664,7 +664,12 @@ async def get_invoice_pdf(invoice_id: str, current_user: User = Depends(get_curr
     return StreamingResponse(
         pdf_buffer,
         media_type="application/pdf",
-        headers={"Content-Disposition": f"attachment; filename={invoice['invoice_number']}.pdf"}
+        headers={
+            "Content-Disposition": f"attachment; filename={invoice['invoice_number']}.pdf",
+            "Content-Type": "application/pdf",
+            "Cache-Control": "no-cache",
+            "Access-Control-Expose-Headers": "Content-Disposition"
+        }
     )
 
 @api_router.get("/invoices/job/{job_id}", response_model=List[Invoice])
