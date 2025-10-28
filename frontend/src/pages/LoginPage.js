@@ -113,18 +113,18 @@ const LoginPage = () => {
           </CardHeader>
           <CardContent>
             <Tabs value={isLogin ? "login" : "register"} onValueChange={(v) => setIsLogin(v === "login")} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-zinc-800 mb-6">
+              <TabsList className="grid w-full grid-cols-2 bg-zinc-800 mb-6 h-14">
                 <TabsTrigger 
                   value="login" 
                   data-testid="login-tab" 
-                  className="text-sm md:text-base data-[state=active]:bg-red-600 data-[state=active]:text-white"
+                  className="text-base md:text-lg font-semibold data-[state=active]:bg-red-600 data-[state=active]:text-white"
                 >
                   Login
                 </TabsTrigger>
                 <TabsTrigger 
                   value="register" 
                   data-testid="register-tab" 
-                  className="text-sm md:text-base data-[state=active]:bg-red-600 data-[state=active]:text-white"
+                  className="text-base md:text-lg font-semibold data-[state=active]:bg-red-600 data-[state=active]:text-white"
                 >
                   Register
                 </TabsTrigger>
