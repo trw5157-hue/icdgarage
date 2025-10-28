@@ -416,18 +416,18 @@ const ManagerDashboard = () => {
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 space-y-4 md:space-y-6">
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full max-w-md grid-cols-2 bg-zinc-800">
+          <TabsList className="grid w-full max-w-lg grid-cols-2 bg-zinc-800 h-14">
             <TabsTrigger 
               value="jobs" 
               data-testid="jobs-tab" 
-              className="text-sm data-[state=active]:bg-red-600 data-[state=active]:text-white"
+              className="text-base md:text-lg font-semibold data-[state=active]:bg-red-600 data-[state=active]:text-white"
             >
               Jobs
             </TabsTrigger>
             <TabsTrigger 
               value="invoices" 
               data-testid="invoices-tab" 
-              className="text-sm data-[state=active]:bg-red-600 data-[state=active]:text-white"
+              className="text-base md:text-lg font-semibold data-[state=active]:bg-red-600 data-[state=active]:text-white"
             >
               Invoices
             </TabsTrigger>
