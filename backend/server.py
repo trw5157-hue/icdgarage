@@ -181,7 +181,8 @@ class Invoice(BaseModel):
     job_id: str
     invoice_date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     labour_charges: float
-    parts_charges: float
+    parts: List[dict] = []  # List of parts with names and charges
+    parts_charges: float  # Total of all parts
     tuning_charges: float
     others_charges: float
     subtotal: float
