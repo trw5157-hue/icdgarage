@@ -765,24 +765,24 @@ const ManagerDashboard = () => {
               <CardHeader>
                 <CardTitle className="heading-font">All Invoices ({invoices.length})</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
+              <CardContent className="p-0 md:p-6">
+                <div className="overflow-x-auto -mx-6 md:mx-0">
+                  <table className="w-full min-w-[700px]">
                     <thead>
                       <tr className="border-b border-zinc-800 text-left">
-                        <th className="pb-3 text-gray-400 font-medium">Invoice No.</th>
-                        <th className="pb-3 text-gray-400 font-medium">Customer</th>
-                        <th className="pb-3 text-gray-400 font-medium">Vehicle</th>
-                        <th className="pb-3 text-gray-400 font-medium">Date</th>
-                        <th className="pb-3 text-gray-400 font-medium">Amount</th>
-                        <th className="pb-3 text-gray-400 font-medium">Actions</th>
+                        <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Invoice No.</th>
+                        <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Customer</th>
+                        <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm hidden md:table-cell">Vehicle</th>
+                        <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm hidden lg:table-cell">Date</th>
+                        <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Amount</th>
+                        <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {invoices.map(({ job, invoice }) => (
                         <tr key={invoice.id} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                          <td className="py-4 font-mono text-sm">{invoice.invoice_number}</td>
-                          <td className="py-4">
+                          <td className="py-4 px-4 md:px-2 font-mono text-xs md:text-sm">{invoice.invoice_number}</td>
+                          <td className="py-4 px-4 md:px-2 text-sm">
                             <div>
                               <div className="font-medium">{job.customer_name}</div>
                               <div className="text-sm text-gray-400">{job.contact_number}</div>
