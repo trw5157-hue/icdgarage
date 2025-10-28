@@ -1030,6 +1030,29 @@ const ManagerDashboard = () => {
             {selectedJob && (
               <>
                 <div className="space-y-2">
+                  <Label>Invoice Number (Optional)</Label>
+                  <Input
+                    type="text"
+                    value={invoice.invoice_number}
+                    onChange={(e) => setInvoice({...invoice, invoice_number: e.target.value})}
+                    className="bg-zinc-800 border-zinc-700"
+                    data-testid="invoice-number"
+                    placeholder="Leave empty for auto-generation"
+                  />
+                  <p className="text-xs text-gray-500">Leave empty to auto-generate (ICD-2025-XXXX)</p>
+                </div>
+                <div className="space-y-2">
+                  <Label>Invoice Date (Optional)</Label>
+                  <Input
+                    type="date"
+                    value={invoice.invoice_date}
+                    onChange={(e) => setInvoice({...invoice, invoice_date: e.target.value})}
+                    className="bg-zinc-800 border-zinc-700"
+                    data-testid="invoice-date"
+                  />
+                  <p className="text-xs text-gray-500">Leave empty to use today's date</p>
+                </div>
+                <div className="space-y-2">
                   <Label>Labour Charges (₹)</Label>
                   <Input
                     type="number"
