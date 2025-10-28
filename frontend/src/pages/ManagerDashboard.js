@@ -672,10 +672,10 @@ const ManagerDashboard = () => {
                     };
                     return (
                     <tr key={job.id} className={`border-b border-zinc-800 hover:bg-zinc-800/50 ${statusClasses[job.status] || ''}`}>
-                      <td className="py-4">
+                      <td className="py-4 px-4 md:px-2">
                         <div>
-                          <div className="font-medium">{job.customer_name}</div>
-                          <div className="text-sm text-gray-400">{job.contact_number}</div>
+                          <div className="font-medium text-sm">{job.customer_name}</div>
+                          <div className="text-xs text-gray-400">{job.contact_number}</div>
                         </div>
                       </td>
                       <td className="py-4 px-4 md:px-2">
