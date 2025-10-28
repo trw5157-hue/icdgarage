@@ -53,7 +53,10 @@ const ManagerDashboard = () => {
     labour_charges: 0,
     parts_charges: 0,
     tuning_charges: 0,
-    others_charges: 0
+    others_charges: 0,
+    gst_rate: 18,
+    invoice_number: "",
+    invoice_date: ""
   });
 
   useEffect(() => {
