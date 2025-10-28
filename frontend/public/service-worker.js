@@ -38,7 +38,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - Network first for API, cache first for static assets
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') {
@@ -50,27 +50,39 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Network first strategy for API calls
+  if (event.request.url.includes('/api/')) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          return response;
+        })
+        .catch(() => {
+          return new Response('API unavailable - Please check your connection', {
+            status: 503,
+            statusText: 'Service Unavailable'
+          });
+        })
+    );
+    return;
+  }
+
+  // Cache first strategy for static assets
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Cache hit - return response
         if (response) {
           return response;
         }
 
-        // Clone the request
-        const fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then((response) => {
-          // Check if valid response
+        return fetch(event.request).then((response) => {
+          // Don't cache non-successful responses
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
 
-          // Clone the response
+          // Clone and cache the response
           const responseToCache = response.clone();
-
-          // Cache the fetched response for next time
           caches.open(CACHE_NAME)
             .then((cache) => {
               cache.put(event.request, responseToCache);
@@ -80,7 +92,6 @@ self.addEventListener('fetch', (event) => {
         });
       })
       .catch(() => {
-        // Return a custom offline page or message
         return new Response('Offline - Please check your internet connection', {
           status: 503,
           statusText: 'Service Unavailable',
