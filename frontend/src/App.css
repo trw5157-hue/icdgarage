@@ -1,34 +1,134 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+h1, h2, h3, h4, h5, h6, .heading-font {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.App {
+  min-height: 100vh;
+  background-color: #000000;
 }
 
-.App-link {
-    color: #61dafb;
+/* ICD Brand Colors */
+:root {
+  --icd-black: #000000;
+  --icd-red: #D32F2F;
+  --icd-white: #FFFFFF;
+  --icd-gray: #1a1a1a;
+  --icd-gray-light: #2a2a2a;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--icd-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--icd-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff1744;
+}
+
+/* Status colors */
+.status-car-received {
+  background-color: #6B7280;
+  color: white;
+}
+
+.status-diagnosis-done {
+  background-color: #EAB308;
+  color: white;
+}
+
+.status-quotation-sent {
+  background-color: #EAB308;
+  color: white;
+}
+
+.status-customer-confirmed {
+  background-color: #F97316;
+  color: white;
+}
+
+.status-parts-ordered {
+  background-color: #F97316;
+  color: white;
+}
+
+.status-in-progress {
+  background-color: #F97316;
+  color: white;
+}
+
+.status-pending {
+  background-color: #EF4444;
+  color: white;
+}
+
+.status-work-complete {
+  background-color: #3B82F6;
+  color: white;
+}
+
+.status-washed {
+  background-color: #3B82F6;
+  color: white;
+}
+
+.status-ready-for-delivery {
+  background-color: #8B5CF6;
+  color: white;
+}
+
+.status-delivered {
+  background-color: #22C55E;
+  color: white;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Button hover effects */
+.btn-hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(211, 47, 47, 0.2);
 }
