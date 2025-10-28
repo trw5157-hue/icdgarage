@@ -1081,7 +1081,7 @@ const ManagerDashboard = () => {
           setSelectedJob(null);
           setInvoice({
             labour_charges: 0,
-            parts_charges: 0,
+            parts: [{ part_name: "", part_charges: 0 }],
             tuning_charges: 0,
             others_charges: 0,
             gst_rate: 18,
