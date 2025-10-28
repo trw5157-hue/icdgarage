@@ -398,12 +398,13 @@ const ManagerDashboard = () => {
               <p className="text-xs md:text-sm text-gray-400">Manager Dashboard</p>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-400">Welcome, {user?.full_name}</span>
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <span className="text-xs md:text-sm text-gray-400 hidden sm:block">Welcome, {user?.full_name}</span>
             <Button 
               onClick={logout} 
               variant="outline" 
-              className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+              size="sm"
+              className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-xs md:text-sm"
               data-testid="logout-button"
             >
               Logout
