@@ -132,3 +132,82 @@ h1, h2, h3, h4, h5, h6, .heading-font {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(211, 47, 47, 0.2);
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Reduce animations on mobile for better performance */
+  .card-hover:hover {
+    transform: none;
+  }
+  
+  .btn-hover-lift:hover {
+    transform: none;
+  }
+  
+  /* Better touch targets */
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
+  
+  /* Prevent text selection on buttons for better mobile UX */
+  button {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  
+  /* Hide emergent badge on mobile for more space */
+  #emergent-badge {
+    display: none !important;
+  }
+  
+  /* Optimize font sizes for mobile */
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Better spacing on mobile */
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for iOS safe area */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Fix for iOS input zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* PWA specific styles */
+@media all and (display-mode: standalone) {
+  /* App is running as PWA */
+  #emergent-badge {
+    display: none !important;
+  }
+  
+  /* Add padding for status bar on mobile */
+  body {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Landscape mode optimizations */
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce header size in landscape */
+  header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
