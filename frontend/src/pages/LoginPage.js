@@ -59,13 +59,13 @@ const LoginPage = () => {
             <img 
               src={process.env.REACT_APP_LOGO_URL} 
               alt="ICD Tuning Logo" 
-              className="w-48 h-auto"
+              className="w-64 h-auto"
             />
             <h1 className="text-5xl font-bold heading-font" style={{ color: '#D32F2F' }}>
               ICD TUNING
             </h1>
             <p className="text-xl text-gray-300">
-              Repair and Services
+              Performance Tuning | Repair & Services
             </p>
           </div>
           <div className="space-y-4 pt-8">
