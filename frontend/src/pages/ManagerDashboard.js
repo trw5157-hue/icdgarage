@@ -773,39 +773,7 @@ const ManagerDashboard = () => {
                             <div className="flex gap-2">
                               <Button
                                 size="sm"
-                                onClick={async () => {
-                                  try {
-                                    const response = await axios.get(`${API}/invoices/${invoice.id}/pdf`, {
-                                      responseType: 'blob',
-                                      headers: {
-                                        'Accept': 'application/pdf'
-                                      }
-                                    });
-                                    
-                                    // Create blob and trigger download
-                                    const blob = new Blob([response.data], { type: 'application/pdf' });
-                                    const url = window.URL.createObjectURL(blob);
-                                    const link = document.createElement('a');
-                                    link.href = url;
-                                    link.download = `${invoice.invoice_number}.pdf`;
-                                    link.style.display = 'none';
-                                    document.body.appendChild(link);
-                                    link.click();
-                                    
-                                    // Cleanup after delay
-                                    setTimeout(() => {
-                                      window.URL.revokeObjectURL(url);
-                                      if (document.body.contains(link)) {
-                                        document.body.removeChild(link);
-                                      }
-                                    }, 2000);
-                                    
-                                    toast.success("PDF download started! Check your downloads folder.");
-                                  } catch (error) {
-                                    console.error("PDF download error:", error);
-                                    toast.error("Failed to download PDF. Try 'View PDF' instead.");
-                                  }
-                                }}
+                                onClick={() => downloadPDFWithAuth(invoice.id, invoice.invoice_number)}
                                 className="bg-blue-600 hover:bg-blue-700 text-xs"
                                 data-testid={`download-invoice-${invoice.id}`}
                               >
@@ -813,10 +781,7 @@ const ManagerDashboard = () => {
                               </Button>
                               <Button
                                 size="sm"
-                                onClick={() => {
-                                  window.open(`${API}/invoices/${invoice.id}/pdf`, '_blank');
-                                  toast.info("PDF opened in new tab");
-                                }}
+                                onClick={() => viewPDFWithAuth(invoice.id, invoice.invoice_number)}
                                 variant="outline"
                                 className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-xs"
                                 data-testid={`view-invoice-${invoice.id}`}
