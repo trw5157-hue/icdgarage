@@ -350,9 +350,12 @@ def generate_invoice_pdf(invoice_data: dict, job_data: dict):
     c.drawString(50, y_pos, "Subtotal")
     c.drawString(width - 150, y_pos, f"{invoice_data['subtotal']:.2f}")
     
-    y_pos -= 20
-    c.drawString(50, y_pos, "GST (18%)")
-    c.drawString(width - 150, y_pos, f"{invoice_data['gst_amount']:.2f}")
+    # Only show GST if it's greater than 0
+    if invoice_data['gst_amount'] > 0:
+        gst_percent = (invoice_data['gst_amount'] / invoice_data['subtotal']) * 100 if invoice_data['subtotal'] > 0 else 0
+        y_pos -= 20
+        c.drawString(50, y_pos, f"GST ({gst_percent:.1f}%)")
+        c.drawString(width - 150, y_pos, f"{invoice_data['gst_amount']:.2f}")
     
     # Line
     c.setStrokeColor(red)
