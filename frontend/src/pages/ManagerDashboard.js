@@ -723,21 +723,36 @@ const ManagerDashboard = () => {
                                 onClick={async () => {
                                   try {
                                     const response = await axios.get(`${API}/invoices/${invoice.id}/pdf`, {
-                                      responseType: 'blob'
+                                      responseType: 'blob',
+                                      headers: {
+                                        'Accept': 'application/pdf'
+                                      }
                                     });
-                                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                                    
+                                    // Create blob and trigger download
+                                    const blob = new Blob([response.data], { type: 'application/pdf' });
+                                    const url = window.URL.createObjectURL(blob);
                                     const link = document.createElement('a');
                                     link.href = url;
                                     link.setAttribute('download', `${invoice.invoice_number}.pdf`);
+                                    link.style.display = 'none';
                                     document.body.appendChild(link);
                                     link.click();
-                                    link.remove();
-                                    toast.success("Invoice downloaded!");
+                                    
+                                    // Cleanup
+                                    setTimeout(() => {
+                                      window.URL.revokeObjectURL(url);
+                                      document.body.removeChild(link);
+                                    }, 100);
+                                    
+                                    toast.success("Invoice PDF downloaded!");
                                   } catch (error) {
-                                    toast.error("Failed to download invoice");
+                                    console.error("PDF download error:", error);
+                                    toast.error("Failed to download invoice PDF");
                                   }
                                 }}
                                 className="bg-blue-600 hover:bg-blue-700 text-xs"
+                                data-testid={`download-invoice-${invoice.id}`}
                               >
                                 Download PDF
                               </Button>
