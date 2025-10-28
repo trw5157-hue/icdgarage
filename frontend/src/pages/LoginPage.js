@@ -107,15 +107,15 @@ const LoginPage = () => {
 
         {/* Right Side - Auth Forms */}
         <Card className="bg-zinc-900 border-zinc-800">
-          <CardHeader>
-            <CardTitle className="text-2xl text-white heading-font">Welcome Back</CardTitle>
+          <CardHeader className="text-center lg:text-left">
+            <CardTitle className="text-xl md:text-2xl text-white heading-font">Welcome to ICD Tuning</CardTitle>
             <CardDescription className="text-gray-400">Sign in to your account or create a new one</CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={isLogin ? "login" : "register"} onValueChange={(v) => setIsLogin(v === "login")}>
-              <TabsList className="grid w-full grid-cols-2 bg-zinc-800">
-                <TabsTrigger value="login" data-testid="login-tab">Login</TabsTrigger>
-                <TabsTrigger value="register" data-testid="register-tab">Register</TabsTrigger>
+            <Tabs value={isLogin ? "login" : "register"} onValueChange={(v) => setIsLogin(v === "login")} className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-zinc-800 mb-6">
+                <TabsTrigger value="login" data-testid="login-tab" className="text-sm md:text-base">Login</TabsTrigger>
+                <TabsTrigger value="register" data-testid="register-tab" className="text-sm md:text-base">Register</TabsTrigger>
               </TabsList>
               
               <TabsContent value="login" className="space-y-4 mt-6">
