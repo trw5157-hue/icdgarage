@@ -608,8 +608,12 @@ async def create_invoice(invoice_data: InvoiceCreate, current_user: User = Depen
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
     
-    # Calculate totals
-    subtotal = (invoice_data.labour_charges + invoice_data.parts_charges + 
+    # Calculate parts total
+    parts_list = [{"part_name": p.part_name, "part_charges": p.part_charges} for p in invoice_data.parts]
+    parts_total = sum(p.part_charges for p in invoice_data.parts)
+    
+    # Calculate subtotal
+    subtotal = (invoice_data.labour_charges + parts_total + 
                 invoice_data.tuning_charges + invoice_data.others_charges)
     
     # Apply GST if rate is provided and > 0
@@ -635,7 +639,8 @@ async def create_invoice(invoice_data: InvoiceCreate, current_user: User = Depen
         job_id=invoice_data.job_id,
         invoice_date=invoice_date,
         labour_charges=invoice_data.labour_charges,
-        parts_charges=invoice_data.parts_charges,
+        parts=parts_list,
+        parts_charges=parts_total,
         tuning_charges=invoice_data.tuning_charges,
         others_charges=invoice_data.others_charges,
         subtotal=subtotal,
