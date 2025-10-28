@@ -641,18 +641,18 @@ const ManagerDashboard = () => {
           <CardHeader>
             <CardTitle className="heading-font">All Jobs ({filteredJobs.length})</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
+          <CardContent className="p-0 md:p-6">
+            <div className="overflow-x-auto -mx-6 md:mx-0">
+              <table className="w-full min-w-[800px]">
                 <thead>
                   <tr className="border-b border-zinc-800 text-left">
-                    <th className="pb-3 text-gray-400 font-medium">Customer</th>
-                    <th className="pb-3 text-gray-400 font-medium">Vehicle</th>
-                    <th className="pb-3 text-gray-400 font-medium">Reg No.</th>
-                    <th className="pb-3 text-gray-400 font-medium">Mechanic</th>
-                    <th className="pb-3 text-gray-400 font-medium">Status</th>
-                    <th className="pb-3 text-gray-400 font-medium">Delivery</th>
-                    <th className="pb-3 text-gray-400 font-medium">Actions</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Customer</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Vehicle</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Reg No.</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm hidden md:table-cell">Mechanic</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Status</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm hidden lg:table-cell">Delivery</th>
+                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
