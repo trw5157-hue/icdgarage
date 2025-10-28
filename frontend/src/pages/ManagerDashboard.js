@@ -352,7 +352,33 @@ const ManagerDashboard = () => {
     return matchesStatus && matchesSearch;
   });
 
-  const subtotal = invoice.labour_charges + invoice.parts_charges + invoice.tuning_charges + invoice.others_charges;
+  // Parts management functions
+  const addPart = () => {
+    setInvoice({
+      ...invoice,
+      parts: [...invoice.parts, { part_name: "", part_charges: 0 }]
+    });
+  };
+
+  const removePart = (index) => {
+    const newParts = invoice.parts.filter((_, i) => i !== index);
+    setInvoice({
+      ...invoice,
+      parts: newParts.length > 0 ? newParts : [{ part_name: "", part_charges: 0 }]
+    });
+  };
+
+  const updatePart = (index, field, value) => {
+    const newParts = [...invoice.parts];
+    newParts[index][field] = field === 'part_charges' ? (parseFloat(value) || 0) : value;
+    setInvoice({
+      ...invoice,
+      parts: newParts
+    });
+  };
+
+  const parts_total = invoice.parts.reduce((sum, part) => sum + (part.part_charges || 0), 0);
+  const subtotal = invoice.labour_charges + parts_total + invoice.tuning_charges + invoice.others_charges;
   const gst = subtotal * ((invoice.gst_rate || 0) / 100);
   const grandTotal = subtotal + gst;
 
