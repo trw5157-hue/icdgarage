@@ -190,10 +190,14 @@ class Invoice(BaseModel):
     sent_to_customer: bool = False
     sent_to_accountant: bool = False
 
+class PartItem(BaseModel):
+    part_name: str
+    part_charges: float
+
 class InvoiceCreate(BaseModel):
     job_id: str
     labour_charges: float
-    parts_charges: float
+    parts: List[PartItem] = []  # List of parts with names and charges
     tuning_charges: float
     others_charges: float
     gst_rate: Optional[float] = 18.0  # Optional GST rate, default 18%
