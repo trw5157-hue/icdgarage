@@ -1156,18 +1156,64 @@ const ManagerDashboard = () => {
                     placeholder="0.00"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label>Parts Charges (₹)</Label>
-                  <Input
-                    type="number"
-                    step="0.01"
-                    value={invoice.parts_charges}
-                    onChange={(e) => setInvoice({...invoice, parts_charges: parseFloat(e.target.value) || 0})}
-                    className="bg-zinc-800 border-zinc-700"
-                    data-testid="invoice-parts-charges"
-                    placeholder="0.00"
-                  />
+                
+                {/* Parts Section */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Label>Parts</Label>
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={addPart}
+                      className="bg-green-600 hover:bg-green-700 text-xs"
+                      data-testid="add-part-button"
+                    >
+                      + Add Part
+                    </Button>
+                  </div>
+                  {invoice.parts.map((part, index) => (
+                    <div key={index} className="flex gap-2 items-start">
+                      <div className="flex-1 space-y-1">
+                        <Input
+                          type="text"
+                          value={part.part_name}
+                          onChange={(e) => updatePart(index, 'part_name', e.target.value)}
+                          className="bg-zinc-800 border-zinc-700"
+                          placeholder="Part name"
+                          data-testid={`part-name-${index}`}
+                        />
+                      </div>
+                      <div className="w-32 space-y-1">
+                        <Input
+                          type="number"
+                          step="0.01"
+                          value={part.part_charges}
+                          onChange={(e) => updatePart(index, 'part_charges', e.target.value)}
+                          className="bg-zinc-800 border-zinc-700"
+                          placeholder="0.00"
+                          data-testid={`part-charges-${index}`}
+                        />
+                      </div>
+                      {invoice.parts.length > 1 && (
+                        <Button
+                          type="button"
+                          size="sm"
+                          onClick={() => removePart(index)}
+                          variant="outline"
+                          className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+                          data-testid={`remove-part-${index}`}
+                        >
+                          ✕
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                  <div className="text-sm text-gray-400 flex justify-between">
+                    <span>Parts Total:</span>
+                    <span>₹{parts_total.toFixed(2)}</span>
+                  </div>
                 </div>
+                
                 <div className="space-y-2">
                   <Label>Tuning/Service Charges (₹)</Label>
                   <Input
