@@ -761,9 +761,9 @@ const ManagerDashboard = () => {
               </Button>
             </div>
             
-            <Card className="bg-zinc-900 border-zinc-800">
+            <Card className="bg-zinc-900 border-zinc-800 overflow-hidden">
               <CardHeader>
-                <CardTitle className="heading-font">All Invoices ({invoices.length})</CardTitle>
+                <CardTitle className="heading-font text-lg md:text-xl">All Invoices ({invoices.length})</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
