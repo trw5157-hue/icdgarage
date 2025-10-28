@@ -1,9 +1,7 @@
 // Service Worker for ICD Tuning PWA
-const CACHE_NAME = 'icd-tuning-v1';
+const CACHE_NAME = 'icd-tuning-v2';
 const urlsToCache = [
   '/',
-  '/static/css/main.css',
-  '/static/js/main.js',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png'
