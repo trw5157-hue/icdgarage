@@ -748,27 +748,41 @@ const ManagerDashboard = () => {
                                     const url = window.URL.createObjectURL(blob);
                                     const link = document.createElement('a');
                                     link.href = url;
-                                    link.setAttribute('download', `${invoice.invoice_number}.pdf`);
+                                    link.download = `${invoice.invoice_number}.pdf`;
                                     link.style.display = 'none';
                                     document.body.appendChild(link);
                                     link.click();
                                     
-                                    // Cleanup
+                                    // Cleanup after delay
                                     setTimeout(() => {
                                       window.URL.revokeObjectURL(url);
-                                      document.body.removeChild(link);
-                                    }, 100);
+                                      if (document.body.contains(link)) {
+                                        document.body.removeChild(link);
+                                      }
+                                    }, 2000);
                                     
-                                    toast.success("Invoice PDF downloaded!");
+                                    toast.success("PDF download started! Check your downloads folder.");
                                   } catch (error) {
                                     console.error("PDF download error:", error);
-                                    toast.error("Failed to download invoice PDF");
+                                    toast.error("Failed to download PDF. Try 'View PDF' instead.");
                                   }
                                 }}
                                 className="bg-blue-600 hover:bg-blue-700 text-xs"
                                 data-testid={`download-invoice-${invoice.id}`}
                               >
                                 Download PDF
+                              </Button>
+                              <Button
+                                size="sm"
+                                onClick={() => {
+                                  window.open(`${API}/invoices/${invoice.id}/pdf`, '_blank');
+                                  toast.info("PDF opened in new tab");
+                                }}
+                                variant="outline"
+                                className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-xs"
+                                data-testid={`view-invoice-${invoice.id}`}
+                              >
+                                View PDF
                               </Button>
                               <Button
                                 size="sm"
