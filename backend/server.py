@@ -196,6 +196,9 @@ class InvoiceCreate(BaseModel):
     parts_charges: float
     tuning_charges: float
     others_charges: float
+    gst_rate: Optional[float] = 18.0  # Optional GST rate, default 18%
+    invoice_number: Optional[str] = None  # Optional custom invoice number
+    invoice_date: Optional[str] = None  # Optional custom invoice date
 
 class InvoiceData(BaseModel):
     labour_cost: float = 0
