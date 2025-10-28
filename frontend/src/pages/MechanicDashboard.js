@@ -272,6 +272,15 @@ const MechanicDashboard = () => {
                         Ready for Delivery
                       </Button>
                     )}
+                    {job.status === "Ready for delivery" && (
+                      <Button
+                        onClick={() => handleStatusUpdate(job.id, "Delivered")}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-sm"
+                        data-testid={`mark-delivered-${job.id}`}
+                      >
+                        Mark as Delivered
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
