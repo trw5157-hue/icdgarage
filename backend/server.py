@@ -80,6 +80,21 @@ def get_google_sheets_client():
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
+# Add middleware to prevent caching on API responses
+from fastapi import Request, Response
+from starlette.middleware.base import BaseHTTPMiddleware
+
+class NoCacheMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        if request.url.path.startswith("/api"):
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+        return response
+
+app.add_middleware(NoCacheMiddleware)
+
 # Models
 class User(BaseModel):
     model_config = ConfigDict(extra="ignore")
