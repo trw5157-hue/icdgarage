@@ -132,7 +132,7 @@ const ManagerDashboard = () => {
   // Invoice Form
   const [invoice, setInvoice] = useState({
     labour_charges: 0,
-    parts_charges: 0,
+    parts: [{ part_name: "", part_charges: 0 }],  // Array of parts
     tuning_charges: 0,
     others_charges: 0,
     gst_rate: 18,
