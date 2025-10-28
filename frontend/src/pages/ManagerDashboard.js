@@ -637,22 +637,22 @@ const ManagerDashboard = () => {
         </Card>
 
         {/* Jobs Table */}
-        <Card className="bg-zinc-900 border-zinc-800">
+        <Card className="bg-zinc-900 border-zinc-800 overflow-hidden">
           <CardHeader>
-            <CardTitle className="heading-font">All Jobs ({filteredJobs.length})</CardTitle>
+            <CardTitle className="heading-font text-lg md:text-xl">All Jobs ({filteredJobs.length})</CardTitle>
           </CardHeader>
-          <CardContent className="p-0 md:p-6">
-            <div className="overflow-x-auto -mx-6 md:mx-0">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
               <table className="w-full min-w-[800px]">
                 <thead>
                   <tr className="border-b border-zinc-800 text-left">
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Customer</th>
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Vehicle</th>
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Reg No.</th>
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm hidden md:table-cell">Mechanic</th>
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Status</th>
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm hidden lg:table-cell">Delivery</th>
-                    <th className="pb-3 px-4 md:px-2 text-gray-400 font-medium text-sm">Actions</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm">Customer</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm">Vehicle</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm">Reg No.</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm hidden md:table-cell">Mechanic</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm">Status</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm hidden lg:table-cell">Delivery</th>
+                    <th className="pb-3 px-4 md:px-6 text-gray-400 font-medium text-sm">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
