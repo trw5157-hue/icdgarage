@@ -110,8 +110,10 @@ const ManagerDashboard = () => {
   const [editingJob, setEditingJob] = useState(null);
   const [showStatusDialog, setShowStatusDialog] = useState(false);
   const [statusChangingJob, setStatusChangingJob] = useState(null);
-  const [activeTab, setActiveTab] = useState("jobs"); // jobs or invoices
+  const [activeTab, setActiveTab] = useState("jobs"); // jobs, invoices, or checklist
   const [invoices, setInvoices] = useState([]);
+  const [checklistJob, setChecklistJob] = useState(null); // Job whose checklist is being viewed/edited
+  const [editableChecklist, setEditableChecklist] = useState([]); // Editable checklist items
 
   // New Job Form
   const [newJob, setNewJob] = useState({
