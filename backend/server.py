@@ -131,9 +131,12 @@ class Job(BaseModel):
     kms: int  # Now mandatory (odometer)
     entry_date: datetime
     work_description: str
+    voice_note: Optional[str] = None  # Base64 encoded audio
     estimated_delivery: datetime
     assigned_mechanic_id: str
     assigned_mechanic_name: str
+    assigned_by_manager_id: str  # Manager who created the job
+    assigned_by_manager_name: str  # Manager's name
     status: str = "Car Received"  # New default status
     photos: List[str] = []  # base64 encoded images
     notes: Optional[str] = None
