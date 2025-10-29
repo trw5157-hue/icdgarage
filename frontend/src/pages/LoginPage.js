@@ -54,11 +54,11 @@ const LoginPage = () => {
     <div className="min-h-screen bg-black flex items-center justify-center p-4" data-testid="login-page">
       <div className="w-full max-w-4xl mx-auto space-y-8">
         {/* Top - Logo and Branding (Always Visible) */}
-        <div className="text-center text-white space-y-4">
+        <div className="text-center text-white space-y-3">
           <img 
             src={process.env.REACT_APP_LOGO_URL} 
             alt="ICD Tuning Logo" 
-            className="w-48 md:w-64 h-auto mx-auto"
+            className="w-64 md:w-80 h-auto mx-auto"
           />
           <h1 className="text-4xl md:text-5xl font-bold heading-font" style={{ color: '#D32F2F' }}>
             ICD TUNING
