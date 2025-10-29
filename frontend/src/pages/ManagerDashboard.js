@@ -205,7 +205,8 @@ const ManagerDashboard = () => {
         year: parseInt(newJob.year),
         kms: newJob.kms ? parseInt(newJob.kms) : null,
         entry_date: new Date(newJob.entry_date).toISOString(),
-        estimated_delivery: new Date(newJob.estimated_delivery).toISOString()
+        estimated_delivery: new Date(newJob.estimated_delivery).toISOString(),
+        checklist: checklistItems.filter(item => item.item.trim() !== "")
       };
       await axios.post(`${API}/jobs`, jobData);
       toast.success("Job created successfully!");
