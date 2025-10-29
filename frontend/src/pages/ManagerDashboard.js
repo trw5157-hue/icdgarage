@@ -232,6 +232,7 @@ const ManagerDashboard = () => {
         assigned_mechanic_id: ""
       });
       setChecklistItems([{ item: "", completed: false }]);
+      setVoiceNote(null);
     } catch (error) {
       toast.error(error.response?.data?.detail || "Failed to create job");
     } finally {
