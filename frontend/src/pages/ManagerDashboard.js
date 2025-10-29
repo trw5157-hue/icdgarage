@@ -618,6 +618,50 @@ const ManagerDashboard = () => {
                     className="bg-zinc-800 border-zinc-700"
                   />
                 </div>
+                
+                {/* Checklist Section */}
+                <div className="space-y-3 border-t border-zinc-700 pt-4">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-base">Work Checklist (Optional)</Label>
+                    <Button 
+                      type="button" 
+                      size="sm" 
+                      onClick={addChecklistItem}
+                      className="bg-green-600 hover:bg-green-700 text-xs"
+                      data-testid="add-checklist-item"
+                    >
+                      + Add Item
+                    </Button>
+                  </div>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {checklistItems.map((item, index) => (
+                      <div key={index} className="flex gap-2 items-center">
+                        <Input
+                          value={item.item}
+                          onChange={(e) => updateChecklistItem(index, e.target.value)}
+                          placeholder={`Task ${index + 1}: e.g., Change engine oil`}
+                          className="bg-zinc-800 border-zinc-700 flex-1"
+                          data-testid={`checklist-item-${index}`}
+                        />
+                        <Button 
+                          type="button" 
+                          size="sm" 
+                          variant="outline"
+                          onClick={() => removeChecklistItem(index)}
+                          className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+                          data-testid={`remove-checklist-${index}`}
+                          disabled={checklistItems.length === 1}
+                        >
+                          ✕
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Add tasks that need to be completed for this job. Mechanics can check them off as they complete each task.
+                  </p>
+                </div>
+                
                 <Button type="submit" className="w-full bg-red-600 hover:bg-red-700" disabled={loading} data-testid="submit-new-job">
                   {loading ? "Creating..." : "Create Job"}
                 </Button>
