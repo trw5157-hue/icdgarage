@@ -193,6 +193,24 @@ const LoginPage = () => {
                       </SelectContent>
                     </Select>
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="secret-code" className="text-white">
+                      Secret Code <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="secret-code"
+                      data-testid="secret-code-input"
+                      type="password"
+                      placeholder="Enter secret code"
+                      value={secretCode}
+                      onChange={(e) => setSecretCode(e.target.value)}
+                      required
+                      className="bg-zinc-800 border-zinc-700 text-white"
+                    />
+                    <p className="text-xs text-gray-400">
+                      Contact administrator for registration access code
+                    </p>
+                  </div>
                   <Button 
                     type="submit" 
                     className="w-full bg-red-600 hover:bg-red-700 text-white btn-hover-lift"
