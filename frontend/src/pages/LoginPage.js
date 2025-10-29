@@ -70,7 +70,7 @@ const LoginPage = () => {
 
         {/* Auth Forms Card */}
         <Card className="bg-zinc-900 border-zinc-800 max-w-2xl mx-auto">
-          <CardHeader className="text-center lg:text-left">
+          <CardHeader className="text-center">
             <CardTitle className="text-xl md:text-2xl text-white heading-font">Welcome to ICD Tuning</CardTitle>
             <CardDescription className="text-gray-400">Sign in to your account or create a new one</CardDescription>
           </CardHeader>
