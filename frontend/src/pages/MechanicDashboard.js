@@ -72,6 +72,23 @@ const MechanicDashboard = () => {
     }
   };
 
+  const handleChecklistUpdate = async (jobId, checklist) => {
+    try {
+      await axios.put(`${API}/jobs/${jobId}/checklist`, checklist);
+      toast.success("Checklist updated!");
+      fetchJobs();
+    } catch (error) {
+      toast.error("Failed to update checklist");
+    }
+  };
+
+  const toggleChecklistItem = (job, index) => {
+    const updatedChecklist = [...(job.checklist || [])];
+    updatedChecklist[index].completed = !updatedChecklist[index].completed;
+    handleChecklistUpdate(job.id, updatedChecklist);
+  };
+
+
   const getStatusBadge = (status, job) => {
     const statusClasses = {
       "Car Received": "bg-gray-500",
