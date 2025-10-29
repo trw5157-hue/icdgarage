@@ -223,6 +223,49 @@ const MechanicDashboard = () => {
                       <div className="text-sm">{job.notes}</div>
                     </div>
                   )}
+                  
+                  {/* Checklist Display */}
+                  {job.checklist && job.checklist.length > 0 && (
+                    <div className="bg-purple-900/20 border border-purple-800 p-3 rounded-lg">
+                      <div className="text-xs text-purple-400 mb-2 flex items-center justify-between">
+                        <span>Work Checklist</span>
+                        <span>
+                          {job.checklist.filter(item => item.completed).length} / {job.checklist.length} completed
+                        </span>
+                      </div>
+                      <div className="space-y-2">
+                        {job.checklist.map((item, index) => (
+                          <div 
+                            key={index} 
+                            className="flex items-center gap-2 p-2 bg-zinc-800/50 rounded hover:bg-zinc-800 transition-colors cursor-pointer"
+                            onClick={() => toggleChecklistItem(job, index)}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={item.completed}
+                              onChange={() => toggleChecklistItem(job, index)}
+                              className="w-4 h-4 rounded border-zinc-600 text-purple-600 focus:ring-purple-600 cursor-pointer"
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                            <span className={`text-sm flex-1 ${item.completed ? 'line-through text-gray-500' : 'text-gray-200'}`}>
+                              {item.item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      {/* Progress Bar */}
+                      <div className="mt-3 pt-2 border-t border-purple-800">
+                        <div className="flex-1 bg-zinc-700 rounded-full h-2">
+                          <div 
+                            className="bg-purple-600 h-2 rounded-full transition-all"
+                            style={{
+                              width: `${(job.checklist.filter(i => i.completed).length / job.checklist.length * 100)}%`
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="flex gap-2 flex-wrap">
                     {/* Status Change Button - Always Available */}
