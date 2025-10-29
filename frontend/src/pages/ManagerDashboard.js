@@ -967,7 +967,7 @@ const ManagerDashboard = () => {
             </Card>
           </TabsContent>
         </Tabs>
-      </main
+      </main>
 
       {/* Status Change Dialog */}
       {statusChangingJob && (
