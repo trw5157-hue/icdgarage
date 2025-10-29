@@ -252,6 +252,43 @@ const ManagerDashboard = () => {
     newItems[index].item = value;
     setChecklistItems(newItems);
   };
+  
+  // Editable checklist functions (for existing jobs)
+  const handleViewChecklist = (job) => {
+    setChecklistJob(job);
+    setEditableChecklist(job.checklist || []);
+    setActiveTab("checklist");
+  };
+  
+  const addEditableChecklistItem = () => {
+    setEditableChecklist([...editableChecklist, { item: "", completed: false }]);
+  };
+  
+  const removeEditableChecklistItem = (index) => {
+    setEditableChecklist(editableChecklist.filter((_, i) => i !== index));
+  };
+  
+  const updateEditableChecklistItem = (index, field, value) => {
+    const newItems = [...editableChecklist];
+    newItems[index][field] = value;
+    setEditableChecklist(newItems);
+  };
+  
+  const saveChecklist = async () => {
+    if (!checklistJob) return;
+    setLoading(true);
+    try {
+      await axios.put(`${API}/jobs/${checklistJob.id}/checklist`, editableChecklist);
+      toast.success("Checklist updated successfully!");
+      fetchJobs();
+      setActiveTab("jobs");
+      setChecklistJob(null);
+    } catch (error) {
+      toast.error("Failed to update checklist");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   const handleSendConfirmation = async (job) => {
