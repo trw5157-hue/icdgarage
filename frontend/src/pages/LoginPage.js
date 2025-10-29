@@ -52,61 +52,24 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4" data-testid="login-page">
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
-        {/* Left Side - Branding */}
-        <div className="hidden lg:flex flex-col space-y-6 text-white">
-          <div className="space-y-4">
-            <img 
-              src={process.env.REACT_APP_LOGO_URL} 
-              alt="ICD Tuning Logo" 
-              className="w-64 h-auto"
-            />
-            <h1 className="text-5xl font-bold heading-font" style={{ color: '#D32F2F' }}>
-              ICD TUNING
-            </h1>
-            <p className="text-xl text-gray-300">
-              Performance Tuning | Repair & Services
-            </p>
-          </div>
-          <div className="space-y-4 pt-8">
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg">Complete Workflow Management</h3>
-                <p className="text-gray-400 text-sm">Track every car from entry to delivery</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg">Real-time Progress Tracking</h3>
-                <p className="text-gray-400 text-sm">Mechanics update status on the go</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg">Automated Invoicing & Notifications</h3>
-                <p className="text-gray-400 text-sm">Generate branded invoices instantly</p>
-              </div>
-            </div>
-          </div>
+      <div className="w-full max-w-4xl mx-auto space-y-8">
+        {/* Top - Logo and Branding (Always Visible) */}
+        <div className="text-center text-white space-y-4">
+          <img 
+            src={process.env.REACT_APP_LOGO_URL} 
+            alt="ICD Tuning Logo" 
+            className="w-48 md:w-64 h-auto mx-auto"
+          />
+          <h1 className="text-4xl md:text-5xl font-bold heading-font" style={{ color: '#D32F2F' }}>
+            ICD TUNING
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300">
+            Performance Tuning | Repair & Services
+          </p>
         </div>
 
-        {/* Right Side - Auth Forms */}
-        <Card className="bg-zinc-900 border-zinc-800">
+        {/* Auth Forms Card */}
+        <Card className="bg-zinc-900 border-zinc-800 max-w-2xl mx-auto">
           <CardHeader className="text-center lg:text-left">
             <CardTitle className="text-xl md:text-2xl text-white heading-font">Welcome to ICD Tuning</CardTitle>
             <CardDescription className="text-gray-400">Sign in to your account or create a new one</CardDescription>
