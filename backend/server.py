@@ -155,6 +155,7 @@ class JobCreate(BaseModel):
     work_description: str
     estimated_delivery: str
     assigned_mechanic_id: str
+    checklist: List[dict] = []  # Optional checklist items
 
 class JobUpdate(BaseModel):
     customer_name: Optional[str] = None
