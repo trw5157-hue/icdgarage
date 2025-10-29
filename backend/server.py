@@ -156,6 +156,7 @@ class JobCreate(BaseModel):
     kms: int  # Now mandatory (odometer)
     entry_date: str
     work_description: str
+    voice_note: Optional[str] = None  # Base64 encoded audio
     estimated_delivery: str
     assigned_mechanic_id: str
     checklist: List[dict] = []  # Optional checklist items
