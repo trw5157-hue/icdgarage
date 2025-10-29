@@ -39,6 +39,13 @@ const LoginPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    // Validate secret code
+    if (secretCode !== "5157") {
+      toast.error("Invalid secret code. Please contact admin for access.");
+      return;
+    }
+    
     setLoading(true);
     try {
       const user = await register(registerUsername, registerPassword, registerFullName, registerRole);
