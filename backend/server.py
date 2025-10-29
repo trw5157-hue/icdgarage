@@ -137,6 +137,7 @@ class Job(BaseModel):
     status: str = "Car Received"  # New default status
     photos: List[str] = []  # base64 encoded images
     notes: Optional[str] = None
+    checklist: List[dict] = []  # [{"item": "Oil change", "completed": false}]
     completion_date: Optional[datetime] = None
     confirm_complete: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
