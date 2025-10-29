@@ -10,6 +10,22 @@ import MechanicDashboard from "@/pages/MechanicDashboard";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Configure axios to prevent caching
+axios.defaults.headers.common['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+axios.defaults.headers.common['Pragma'] = 'no-cache';
+axios.defaults.headers.common['Expires'] = '0';
+
+// Add request interceptor to add timestamp to prevent browser caching
+axios.interceptors.request.use((config) => {
+  if (config.method === 'get') {
+    config.params = {
+      ...config.params,
+      _t: new Date().getTime()
+    };
+  }
+  return config;
+});
+
 // Auth Context
 const AuthContext = createContext(null);
 
