@@ -580,6 +580,22 @@ async def update_job(job_id: str, update_data: JobUpdate, current_user: User = D
     return Job(**updated_job)
 
 
+@api_router.put("/jobs/{job_id}/checklist")
+async def update_checklist(job_id: str, checklist: List[dict], current_user: User = Depends(get_current_user)):
+    """Update the checklist for a job"""
+    job = await db.jobs.find_one({"id": job_id}, {"_id": 0})
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    
+    # Check access - both Manager and assigned Mechanic can update
+    if current_user.role == "Mechanic" and job['assigned_mechanic_id'] != current_user.id:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    await db.jobs.update_one({"id": job_id}, {"$set": {"checklist": checklist}})
+    
+    return {"success": True, "checklist": checklist}
+
+
 @api_router.post("/jobs/{job_id}/photos")
 async def add_job_photo(job_id: str, photo: UploadFile = File(...), current_user: User = Depends(get_current_user)):
     """Add photo to a job"""
