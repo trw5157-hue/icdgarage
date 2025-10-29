@@ -17,6 +17,7 @@ const LoginPage = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerFullName, setRegisterFullName] = useState("");
   const [registerRole, setRegisterRole] = useState("Mechanic");
+  const [secretCode, setSecretCode] = useState("");
   const [loading, setLoading] = useState(false);
   
   const { login, register } = useAuth();
