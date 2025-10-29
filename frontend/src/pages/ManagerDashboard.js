@@ -226,12 +226,31 @@ const ManagerDashboard = () => {
         estimated_delivery: "",
         assigned_mechanic_id: ""
       });
+      setChecklistItems([{ item: "", completed: false }]);
     } catch (error) {
       toast.error(error.response?.data?.detail || "Failed to create job");
     } finally {
       setLoading(false);
     }
   };
+  
+  // Checklist management functions
+  const addChecklistItem = () => {
+    setChecklistItems([...checklistItems, { item: "", completed: false }]);
+  };
+
+  const removeChecklistItem = (index) => {
+    if (checklistItems.length > 1) {
+      setChecklistItems(checklistItems.filter((_, i) => i !== index));
+    }
+  };
+
+  const updateChecklistItem = (index, value) => {
+    const newItems = [...checklistItems];
+    newItems[index].item = value;
+    setChecklistItems(newItems);
+  };
+
 
   const handleSendConfirmation = async (job) => {
     try {
