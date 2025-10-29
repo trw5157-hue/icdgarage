@@ -128,6 +128,9 @@ const ManagerDashboard = () => {
     estimated_delivery: "",
     assigned_mechanic_id: ""
   });
+  
+  // Checklist for new jobs
+  const [checklistItems, setChecklistItems] = useState([{ item: "", completed: false }]);
 
   // Invoice Form
   const [invoice, setInvoice] = useState({
