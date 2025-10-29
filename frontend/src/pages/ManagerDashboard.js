@@ -115,6 +115,7 @@ const ManagerDashboard = () => {
   const [invoices, setInvoices] = useState([]);
   const [checklistJob, setChecklistJob] = useState(null); // Job whose checklist is being viewed/edited
   const [editableChecklist, setEditableChecklist] = useState([]); // Editable checklist items
+  const [voiceNote, setVoiceNote] = useState(null); // Voice recording for new job
 
   // New Job Form
   const [newJob, setNewJob] = useState({
