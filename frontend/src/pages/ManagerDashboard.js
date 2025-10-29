@@ -493,6 +493,13 @@ const ManagerDashboard = () => {
             >
               Invoices
             </TabsTrigger>
+            <TabsTrigger 
+              value="checklist" 
+              data-testid="checklist-tab" 
+              className="text-base md:text-lg font-semibold data-[state=active]:bg-red-600 data-[state=active]:text-white"
+            >
+              Checklist
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="jobs" className="space-y-4 md:space-y-6 mt-4 md:mt-6">
