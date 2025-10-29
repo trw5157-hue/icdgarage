@@ -208,77 +208,27 @@ const MechanicDashboard = () => {
                   )}
 
                   <div className="flex gap-2 flex-wrap">
-                    {(job.status === "Car Received" || job.status === "Pending") && (
-                      <Button
-                        onClick={() => handleStatusUpdate(job.id, "Diagnosis Done")}
-                        className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-sm"
-                        data-testid={`start-diagnosis-${job.id}`}
-                      >
-                        Start Diagnosis
-                      </Button>
-                    )}
-                    {job.status === "Diagnosis Done" && (
-                      <Button
-                        onClick={() => handleStatusUpdate(job.id, "Quotation sent")}
-                        className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-sm"
-                        data-testid={`send-quotation-${job.id}`}
-                      >
-                        Send Quotation
-                      </Button>
-                    )}
-                    {job.status === "Customer Confirmed" && (
-                      <Button
-                        onClick={() => handleStatusUpdate(job.id, "In Progress")}
-                        className="flex-1 bg-orange-600 hover:bg-orange-700 text-sm"
-                        data-testid={`start-work-${job.id}`}
-                      >
-                        Start Work
-                      </Button>
-                    )}
+                    {/* Status Change Button - Always Available */}
+                    <Button
+                      onClick={() => {
+                        setStatusChangingJob(job);
+                        setShowStatusDialog(true);
+                      }}
+                      variant="outline"
+                      className="flex-1 border-zinc-700 hover:bg-zinc-800 text-sm"
+                      data-testid={`change-status-${job.id}`}
+                    >
+                      Change Status
+                    </Button>
+                    
                     {job.status === "In Progress" && (
-                      <>
-                        <Button
-                          onClick={() => handleConfirmComplete(job.id)}
-                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-sm"
-                          data-testid={`mark-complete-${job.id}`}
-                        >
-                          Mark Complete
-                        </Button>
-                        <Button
-                          onClick={() => setSelectedJob(job)}
-                          variant="outline"
-                          className="border-zinc-700 hover:bg-zinc-800 text-sm"
-                          data-testid={`add-notes-${job.id}`}
-                        >
-                          Add Notes
-                        </Button>
-                      </>
-                    )}
-                    {job.status === "Work complete" && (
                       <Button
-                        onClick={() => handleStatusUpdate(job.id, "Washed")}
-                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-sm"
-                        data-testid={`mark-washed-${job.id}`}
+                        onClick={() => setSelectedJob(job)}
+                        variant="outline"
+                        className="border-zinc-700 hover:bg-zinc-800 text-sm"
+                        data-testid={`add-notes-${job.id}`}
                       >
-                        Mark as Washed
-                      </Button>
-                    )}
-                    {job.status === "Washed" && (
-                      <Button
-                        onClick={() => handleStatusUpdate(job.id, "Ready for delivery")}
-                        className="flex-1 bg-purple-600 hover:bg-purple-700 text-sm"
-                        data-testid={`mark-ready-${job.id}`}
-                      >
-                        Ready for Delivery
-                      </Button>
-                    )}
-                    {job.status === "Ready for delivery" && (
-                      <Button
-                        onClick={() => handleStatusUpdate(job.id, "Delivered")}
-                        className="flex-1 bg-green-600 hover:bg-green-700 text-sm"
-                        data-testid={`mark-delivered-${job.id}`}
-                      >
-                        Mark as Delivered
+                        Add Notes
                       </Button>
                     )}
                   </div>
