@@ -482,6 +482,8 @@ async def create_job(job_data: JobCreate, current_user: User = Depends(get_curre
     
     job_dict = job_data.model_dump()
     job_dict['assigned_mechanic_name'] = mechanic['full_name']
+    job_dict['assigned_by_manager_id'] = current_user.id
+    job_dict['assigned_by_manager_name'] = current_user.full_name
     job_dict['entry_date'] = datetime.fromisoformat(job_data.entry_date)
     job_dict['estimated_delivery'] = datetime.fromisoformat(job_data.estimated_delivery)
     
