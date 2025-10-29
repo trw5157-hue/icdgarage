@@ -973,6 +973,135 @@ const ManagerDashboard = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          {/* Checklist Tab */}
+          <TabsContent value="checklist" className="space-y-6 mt-6">
+            {checklistJob ? (
+              <Card className="bg-zinc-900 border-zinc-800">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle className="heading-font text-lg md:text-xl">
+                        Checklist for {checklistJob.customer_name}'s {checklistJob.car_brand} {checklistJob.car_model}
+                      </CardTitle>
+                      <CardDescription className="mt-2">
+                        Reg: {checklistJob.registration_number} | Status: {checklistJob.status}
+                      </CardDescription>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setActiveTab("jobs");
+                        setChecklistJob(null);
+                      }}
+                      className="border-zinc-700"
+                    >
+                      Back to Jobs
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-base font-semibold">Work Items</h3>
+                    <Button 
+                      size="sm" 
+                      onClick={addEditableChecklistItem}
+                      className="bg-green-600 hover:bg-green-700"
+                    >
+                      + Add Item
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {editableChecklist.length === 0 ? (
+                      <div className="text-center py-8 text-gray-400">
+                        No checklist items yet. Click "+ Add Item" to create tasks.
+                      </div>
+                    ) : (
+                      editableChecklist.map((item, index) => (
+                        <div key={index} className="flex gap-3 items-center bg-zinc-800 p-3 rounded-lg">
+                          <input
+                            type="checkbox"
+                            checked={item.completed}
+                            onChange={(e) => updateEditableChecklistItem(index, 'completed', e.target.checked)}
+                            className="w-5 h-5 rounded border-zinc-600 text-red-600 focus:ring-red-600"
+                          />
+                          <Input
+                            value={item.item}
+                            onChange={(e) => updateEditableChecklistItem(index, 'item', e.target.value)}
+                            placeholder={`Task ${index + 1}`}
+                            className="flex-1 bg-zinc-900 border-zinc-700"
+                          />
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => removeEditableChecklistItem(index)}
+                            className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+                          >
+                            ✕
+                          </Button>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                  
+                  <div className="flex gap-3 pt-4 border-t border-zinc-800">
+                    <Button
+                      onClick={saveChecklist}
+                      className="bg-red-600 hover:bg-red-700 flex-1"
+                      disabled={loading}
+                    >
+                      {loading ? "Saving..." : "Save Checklist"}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setActiveTab("jobs");
+                        setChecklistJob(null);
+                      }}
+                      className="border-zinc-700"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                  
+                  <div className="mt-4 p-4 bg-zinc-800 rounded-lg">
+                    <h4 className="font-semibold mb-2">Progress</h4>
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1 bg-zinc-700 rounded-full h-3">
+                        <div 
+                          className="bg-green-600 h-3 rounded-full transition-all"
+                          style={{
+                            width: `${editableChecklist.length > 0 ? (editableChecklist.filter(i => i.completed).length / editableChecklist.length * 100) : 0}%`
+                          }}
+                        />
+                      </div>
+                      <span className="text-sm text-gray-400">
+                        {editableChecklist.filter(i => i.completed).length} / {editableChecklist.length} completed
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="bg-zinc-900 border-zinc-800">
+                <CardContent className="py-12 text-center">
+                  <div className="text-gray-400 space-y-2">
+                    <p className="text-lg">No job selected</p>
+                    <p className="text-sm">Go to Jobs tab and click "Checklist" button on any job to view/edit its checklist</p>
+                  </div>
+                  <Button
+                    onClick={() => setActiveTab("jobs")}
+                    className="mt-4 bg-red-600 hover:bg-red-700"
+                  >
+                    Go to Jobs
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+
         </Tabs>
       </main>
 
