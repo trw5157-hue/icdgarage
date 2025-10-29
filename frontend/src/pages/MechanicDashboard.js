@@ -210,12 +210,23 @@ const MechanicDashboard = () => {
                       <span className="text-gray-400">Delivery:</span>
                       <span>{new Date(job.estimated_delivery).toLocaleDateString()}</span>
                     </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Assigned By:</span>
+                      <span className="font-semibold text-blue-400">{job.assigned_by_manager_name || 'Manager'}</span>
+                    </div>
                   </div>
                   
                   <div className="bg-zinc-800 p-3 rounded-lg">
                     <div className="text-xs text-gray-400 mb-1">Work Description</div>
                     <div className="text-sm">{job.work_description}</div>
                   </div>
+                  
+                  {job.voice_note && (
+                    <div className="bg-purple-900/20 border border-purple-800 p-3 rounded-lg">
+                      <div className="text-xs text-purple-400 mb-2">🎤 Voice Note from Manager</div>
+                      <audio src={job.voice_note} controls className="w-full h-10" />
+                    </div>
+                  )}
 
                   {job.notes && (
                     <div className="bg-blue-900/20 border border-blue-800 p-3 rounded-lg">
