@@ -659,7 +659,20 @@ const ManagerDashboard = () => {
                     required
                     rows={4}
                     className="bg-zinc-800 border-zinc-700"
+                    placeholder="Describe the work to be performed..."
                   />
+                </div>
+                
+                {/* Voice Note Option */}
+                <div className="space-y-2">
+                  <Label className="text-base">Voice Note (Optional)</Label>
+                  <VoiceRecorder 
+                    onRecordingComplete={setVoiceNote}
+                    existingRecording={voiceNote}
+                  />
+                  <p className="text-xs text-gray-400">
+                    Record a voice note with additional instructions or details about the work
+                  </p>
                 </div>
                 
                 {/* Checklist Section */}
