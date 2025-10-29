@@ -850,17 +850,6 @@ const ManagerDashboard = () => {
                               Invoice
                             </Button>
                           )}
-                          
-                          {/* Checklist Button */}
-                          <Button
-                            size="sm"
-                            onClick={() => handleViewChecklist(job)}
-                            variant="outline"
-                            className="border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white text-xs"
-                            data-testid={`view-checklist-${job.id}`}
-                          >
-                            Checklist {job.checklist && job.checklist.length > 0 && `(${job.checklist.length})`}
-                          </Button>
                         </div>
                       </td>
                     </tr>
